@@ -1,0 +1,13 @@
+[package]
+name = "stackfmt"
+description = "Write formatted string to a buffer without alloc"
+version = "0.1.0"
+authors = ["Vladimir Zvezda"]
+edition = "2018"
+license = "MIT"
+keywords = ["format", "stack"]
+categories = ["no-std"]
+readme = "README.md"
+repository = "https://github.com/vzvezda/stackfmt"
+
+# No dependencies!
