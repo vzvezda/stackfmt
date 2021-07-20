@@ -20,7 +20,7 @@ use core::str::from_utf8_unchecked;
 /// ```
 pub struct WriteTo<'a> {
     buffer: &'a mut [u8],
-    used: usize,    // Possition inside buffer where the written string ends
+    used: usize,    // Position inside buffer where the written string ends
     overflow: bool, // If formatted data was truncated
 }
 
@@ -33,6 +33,11 @@ impl<'a> WriteTo<'a> {
             used: 0,
             overflow: false,
         }
+    }
+
+    /// How many bytes were written into the buffer
+    pub fn written_bytes(&self) -> usize {
+        self.used
     }
 
     /// Returns buffer view as &str
@@ -95,7 +100,7 @@ impl<'a> fmt::Write for WriteTo<'a> {
 }
 
 /// Writes formatted string into the buffer truncating if needed making the result valid utf8.
-/// 
+///
 /// Example:
 /// ```rust
 /// let mut buf = [0u8; 6];
@@ -143,8 +148,7 @@ pub mod tests {
         // U+10348 = F0 90 8D 88
         // U+20AC  = E2 82 AC
         let buf = [
-            0xF0u8, 0x90, 0x8D, 0x88, /* next char */ 0xE2, 0x82, 0xAC,
-            /* ascii */ 0x20,
+            0xF0u8, 0x90, 0x8D, 0x88, /* next char */ 0xE2, 0x82, 0xAC, /* ascii */ 0x20,
         ];
         assert_eq!(super::find_closest_boundary(&buf, 0), 0);
         assert_eq!(super::find_closest_boundary(&buf, 1), 0);
@@ -193,4 +197,3 @@ pub mod tests {
         assert_eq!(formatted, "Add");
     }
 }
-
