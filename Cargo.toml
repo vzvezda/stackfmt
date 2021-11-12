@@ -1,9 +1,9 @@
 [package]
 name = "stackfmt"
 description = "Write formatted string to a buffer without alloc"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Vladimir Zvezda"]
-edition = "2018"
+edition = "2021"
 license = "MIT"
 keywords = ["format", "stack"]
 categories = ["no-std"]
